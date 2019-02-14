@@ -15,7 +15,7 @@ public final class App {
     private static Configurations config;
     private static Producer<Long, String> producer; 
     private static String topic;
-    private static final Logger LOGGER = LoggerFactory.getLogger("azurepgnotify");
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     private App() {
     }
@@ -24,7 +24,7 @@ public final class App {
         producer = new KafkaEventHubProducer().createProducer();
         config = new Configurations();
         topic = config.getProperty("pgnotify.kafka.topic");
-
+        
         PGNotificationListener listener = new PGNotificationListener() {
             @Override
             public void notification(int processId, String channelName, String payload) {
